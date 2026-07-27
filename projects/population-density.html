@@ -40,9 +40,10 @@
   </p>
 </header>
 
+<div class="container">
 <main>
 
-<section class="container">
+<section>
 
   <figure class="plot">
     <img src="https://raw.githubusercontent.com/Chris010980/global_population_density/master/output/global_population_density_robinson.png"
@@ -124,7 +125,7 @@
   </details>
 
 </section>
-<section class="container text-block">
+<section class="text-block">
 
 <h2>Processing Pipeline</h2>
 
@@ -180,7 +181,7 @@ def reproject_raster(src, dst_crs, resolution=None):
 </section>
 <!-- ================= Mercator explanation ================= -->
 
-<section class="container text-block">
+<section class="text-block">
 
   <h2>The Mercator Projection and Geometric Distortion</h2>
 
@@ -270,7 +271,7 @@ def reproject_raster(src, dst_crs, resolution=None):
 
 </section>
 
-<section class="container">
+<section>
 
   <figure class="plot">
     <img src="../assets/population/Sphere.png"
@@ -293,7 +294,7 @@ def reproject_raster(src, dst_crs, resolution=None):
 <footer>
   <p>© <span id="year"></span> Christian Lurz</p>
 </footer>
-
+</div>
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
 </script>
