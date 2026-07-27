@@ -1,204 +1,334 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Arctic Sea Ice Coverage – Hudson Bay</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta name="description"
-        content="Geospatial analysis of seasonal and long-term changes in Arctic sea ice coverage using satellite data." />
+<title>Hudson Bay Sea Ice Monitoring</title>
 
-  <link rel="stylesheet" href="../css/style.css" />
+<meta name="description"
+      content="Automated geospatial analysis pipeline for daily Hudson Bay sea ice observations using Python, Rasterio and Cartopy." />
+
+<link rel="stylesheet" href="../css/style.css" />
+
 </head>
 
 <body>
 
+<div class="container">
+
 <header>
-  <h1>Sea Ice Coverage in the Hudson Bay Region</h1>
-  <p>
-    Geospatial analysis of Arctic sea ice dynamics based on daily satellite observations.
-  </p>
+
+<h1>Hudson Bay Sea Ice Monitoring</h1>
+
+<p>
+An automated geospatial processing pipeline for analysing daily satellite-derived
+sea ice concentration in the Hudson Bay region.
+The project combines data acquisition, GIS processing,
+time-series analysis and publication-quality visualisations.
+</p>
+
 </header>
 
 <main>
 
-<!-- =========================================================
-     Scientific Context
-========================================================= -->
+<!-- ====================================================== -->
 <section class="container info-box">
-  <h2>Scientific Context</h2>
 
-  <p>
-    Sea ice coverage is a key indicator of climate change in polar regions.
-    The Hudson Bay area is particularly sensitive due to its relatively shallow depth
-    and strong seasonal variability.
-  </p>
+<h2>Project Overview</h2>
 
-  <p>
-    This project analyzes long-term changes in ice coverage by combining
-    daily satellite observations with geospatial processing techniques.
-    The focus lies on quantifying:
-  </p>
+<p>
 
-  <ul>
-    <li>Seasonal freezing and melting cycles</li>
-    <li>Interannual variability</li>
-    <li>Long-term trends in ice extent</li>
-  </ul>
-</section>
+This project demonstrates an end-to-end scientific data processing workflow.
+Daily GeoTIFF products from the National Snow and Ice Data Center (NSIDC)
+are automatically downloaded, analysed and transformed into regional statistics
+and high-quality figures.
 
-<!-- =========================================================
-     Region Definition
-========================================================= -->
-<section class="container">
+</p>
 
-  <figure class="plot">
-    <img src="../assets/ice/hudson_bay_area.png"
-         alt="Hudson Bay Area"
-         class="plot-image" />
+<p>
 
-    <figcaption class="caption">
-      Region of interest used for the analysis. The mask defines ocean areas
-      within Hudson Bay for which sea ice concentration is evaluated.
-    </figcaption>
-  </figure>
+The complete workflow is fully reproducible and designed for automated daily
+updates.
 
-  <p>
-    The region is defined using a geographic mask derived from coastline data.
-    Only ocean grid cells are included in the analysis to ensure a physically
-    meaningful normalization of ice coverage.
-  </p>
+</p>
 
 </section>
 
-<!-- =========================================================
-     Data Pipeline
-========================================================= -->
-<section class="container">
-  <h2>Data Pipeline</h2>
+<!-- ====================================================== -->
 
-  <p>
-    The analysis is based on daily sea ice concentration data spanning multiple decades.
-    Raw data is processed in several steps:
-  </p>
+<section>
 
-  <ol>
-    <li>Download daily satellite-derived sea ice concentration fields</li>
-    <li>Extract the Hudson Bay region using a geographic mask</li>
-    <li>Compute total ice-covered area relative to ocean surface</li>
-    <li>Aggregate results into time series</li>
-  </ol>
+<h2>Current Dataset</h2>
 
-  <p>
-    Due to the large volume of input data (daily resolution over ~40 years),
-    preprocessing is computationally expensive and is therefore separated from
-    the visualization layer.
-  </p>
-</section>
+<div class="stats-grid">
 
-<!-- =========================================================
-     Results – Time Series
-========================================================= -->
-<section class="container">
+<div class="stat-card">
+<h3>Dataset Date</h3>
+<p id="datasetDate">loading...</p>
+</div>
 
-  <figure class="plot">
-    <img src="../assets/ice/hudson_bay_timeseries.png"
-         alt="Time series of sea ice coverage in Hudson Bay"
-         class="plot-image" />
+<div class="stat-card">
+<h3>Hudson Bay sea ice coverage</h3>
+<p id="relativeCoverage">loading...</p>
+</div>
 
-    <figcaption class="caption">
-      Time series of relative sea ice coverage. The data reveals a systematic
-      reduction in ice extent and a shift towards shorter ice-covered seasons.
-    </figcaption>
-  </figure>
+<div class="stat-card">
+<h3>Ice-covered Area</h3>
+<p id="iceArea">loading...</p>
+</div>
 
-  <p>
-    The time series highlights both seasonal cycles and long-term trends.
-    Recent decades show a clear tendency towards earlier melting and delayed freezing.
-  </p>
+<div class="stat-card">
+<h3>Dataset</h3>
+<p id="dataset">loading...</p>
+</div>
 
-</section>
+<div class="stat-card">
+<h3>generated</h3>
+<p id="generated">loading...</p>
+</div>
 
-<!-- =========================================================
-     Results – Seasonal Structure
-========================================================= -->
-<section class="container">
+<div class="stat-card">
+<h3>Current entries in dataset</h3>
+<p id="observations">loading...</p>
+</div>
 
-  <figure class="plot">
-    <img src="../assets/ice/hudson_bay_polar.png"
-         alt="Polar plot of seasonal ice coverage"
-         class="plot-image" />
+<div class="stat-card">
+<h3>Pipeline</h3>
+<p style="color:green;">✔ Up to date</p>
+</div>
 
-    <figcaption class="caption">
-      Polar representation of seasonal cycles. Each curve corresponds to a single year,
-      allowing direct comparison of seasonal dynamics across decades.
-    </figcaption>
-  </figure>
+</div>
 
-  <p>
-    The polar representation emphasizes structural changes in the seasonal cycle,
-    revealing an expansion of ice-free periods and increased variability.
-  </p>
+<p>
+
+These values are generated automatically during the daily processing pipeline
+and are read directly from the latest analysis results.
+
+</p>
 
 </section>
 
-<!-- =========================================================
-     Outlook / Extensions
-========================================================= -->
-<section class="container">
-  <h2>Outlook</h2>
+<!-- ====================================================== -->
 
-  <p>
-    The current implementation focuses on a fixed region. Future extensions include:
-  </p>
+<section>
 
-  <ul>
-    <li>Interactive region selection (Region Picker)</li>
-    <li>Support for multiple datasets and satellite products</li>
-    <li>Automated generation of animations and seasonal summaries</li>
-  </ul>
+<h2>Processing Pipeline</h2>
+
+<ol>
+
+<li>Automatic download of daily NSIDC GeoTIFF products</li>
+
+<li>GeoTIFF validation and preprocessing</li>
+
+<li>Geographic masking of predefined Hudson Bay regions</li>
+
+<li>Calculation of ice-covered area and relative ice coverage</li>
+
+<li>Generation of maps, time-series plots and polar visualisations</li>
+
+<li>Automatic export for GitHub Pages</li>
+
+</ol>
+
+</section>
+
+<!-- ====================================================== -->
+
+<section>
+
+<h2>Regional Overview</h2>
+
+<figure class="plot">
+
+<img
+src="https://raw.githubusercontent.com/Chris010980/hudson_bay_sea_ice_showcase/master/output/plots/sea_ice_geotiff_overview_hudson_bay.png"
+alt="Hudson Bay overview"
+class="plot-image">
+
+<figcaption>
+
+Daily sea ice concentration map together with the analysis region used for the
+statistical evaluation.
+
+</figcaption>
+
+</figure>
+
+</section>
+
+<!-- ====================================================== -->
+
+<section>
+
+<h2>Seasonal Evolution</h2>
+
+<figure class="plot">
+
+<img
+src="https://raw.githubusercontent.com/Chris010980/hudson_bay_sea_ice_showcase/master/output/plots/timeseries/Hudson_Bay_relative.png"
+class="plot-image"
+alt="Hudson Bay Time Series">
+
+<figcaption>
+
+Relative sea ice coverage for all available years.
+Colours indicate observation year.
+
+</figcaption>
+
+</figure>
+
+</section>
+
+<!-- ====================================================== -->
+
+<section>
+
+<h2>Seasonal Cycle</h2>
+
+<figure class="plot">
+
+<img
+src="https://raw.githubusercontent.com/Chris010980/hudson_bay_sea_ice_showcase/master/output/plots/timeseries/Hudson_Bay_polar_relative.png"
+class="plot-image"
+alt="Hudson Bay Polar Plot">
+
+<figcaption>
+
+Polar representation of the annual freeze-up and melt cycle.
+Each curve represents one individual year.
+
+</figcaption>
+
+</figure>
+
+</section>
+
+<!-- ====================================================== -->
+
+<section>
+
+<h2>Technical Highlights</h2>
+
+<ul>
+
+<li>Automatic daily update pipeline</li>
+
+<li>Python-based geospatial processing</li>
+
+<li>Rasterio & Cartopy for GIS visualisation</li>
+
+<li>Region masking using GeoJSON polygons</li>
+
+<li>Publication-quality Matplotlib figures</li>
+
+<li>Reproducible scientific workflow</li>
+
+<li>Continuous generation of analysis products</li>
+
+</ul>
+
+</section>
+
+<!-- ====================================================== -->
+
+<section>
+
+<h2>Repository</h2>
+
+<p>
+
+The complete processing pipeline including data download,
+analysis and visualisation is available on GitHub.
+
+</p>
+
+<p>
+
+A dedicated project website containing the scientific background,
+methodology and future extensions is currently under development.
+
+</p>
 
 </section>
 
 <section>
-  <p><a href="../index.html">← Back to overview</a></p>
+
+<p>
+
+<a href="../index.html">
+
+← Back to portfolio
+
+</a>
+
+</p>
+
 </section>
 
 </main>
 
 <footer>
-  <p>© <span id="year"></span> Christian Lurz</p>
+
+<p>
+
+© <span id="year"></span> Christian Lurz
+
+</p>
+
 </footer>
 
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-</script>
-
-<div id="lightbox" class="lightbox" aria-hidden="true">
-  <img id="lightbox-img" alt="">
 </div>
 
 <script>
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImg = document.getElementById("lightbox-img");
 
-  document.querySelectorAll(".plot img").forEach(img => {
-    img.addEventListener("click", () => {
-      lightboxImg.src = img.src;
-      lightboxImg.alt = img.alt;
-      lightbox.classList.add("active");
-    });
-  });
+document.getElementById("year").textContent =
+new Date().getFullYear();
 
-  lightbox.addEventListener("click", () => {
-    lightbox.classList.remove("active");
-  });
+fetch(
+"https://raw.githubusercontent.com/Chris010980/hudson_bay_sea_ice_showcase/master/output/analysis/latest.json"
+)
 
-  document.addEventListener("keydown", e => {
-    if (e.key === "Escape") lightbox.classList.remove("active");
-  });
+.then(response => response.json())
+
+.then(data => {
+
+    const hudsonBay = data.regions.find(
+        region => region.region === "Hudson Bay"
+    );
+
+    if (!hudsonBay) {
+        console.error("Hudson Bay not found.");
+        return;
+    }
+
+    document.getElementById("datasetDate").textContent =
+        hudsonBay.date;
+
+    document.getElementById("relativeCoverage").textContent =
+        hudsonBay.relative_coverage_percent.toFixed(1) + " %";
+
+    document.getElementById("iceArea").textContent =
+        Math.round(hudsonBay.relative_ice_area_km2).toLocaleString()
+        + " km²";
+
+    document.getElementById("dataset").textContent =
+        data.dataset;
+
+    document.getElementById("generated").textContent =
+        new Date(data.generated).toLocaleString();
+
+    document.getElementById("observations").textContent =
+        data.observations.toLocaleString();
+
+})
+
+.catch(console.error);
+
 </script>
 
 </body>
+
 </html>
