@@ -1,334 +1,374 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
 
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Hudson Bay Sea Ice Monitoring</title>
+    <title>Hudson Bay Sea Ice Monitoring</title>
 
-<meta name="description"
-      content="Automated geospatial analysis pipeline for daily Hudson Bay sea ice observations using Python, Rasterio and Cartopy." />
+    <meta name="description"
+          content="Automated geospatial analysis pipeline for daily Hudson Bay sea ice observations using Python, Rasterio and Cartopy." />
 
-<link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
 
-</head>
+  </head>
 
-<body>
+  <body>
 
-<div class="container">
+    <div class="container">
 
-<header>
+      <header>
 
-<h1>Hudson Bay Sea Ice Monitoring</h1>
+      <h1>Hudson Bay Sea Ice Monitoring</h1>
 
-<p>
-An automated geospatial processing pipeline for analysing daily satellite-derived
-sea ice concentration in the Hudson Bay region.
-The project combines data acquisition, GIS processing,
-time-series analysis and publication-quality visualisations.
-</p>
+      <p>
+      An automated geospatial processing pipeline for analysing daily satellite-derived
+      sea ice concentration in the Hudson Bay region.
+      The project combines data acquisition, GIS processing,
+      time-series analysis and publication-quality visualisations.
+      </p>
 
-</header>
+      </header>
 
-<main>
+      <main>
 
-<!-- ====================================================== -->
-<section class="container info-box">
+        <!-- ====================================================== -->
+        <section class="container info-box">
 
-<h2>Project Overview</h2>
+          <h2>Project Overview</h2>
 
-<p>
+          <p>
 
-This project demonstrates an end-to-end scientific data processing workflow.
-Daily GeoTIFF products from the National Snow and Ice Data Center (NSIDC)
-are automatically downloaded, analysed and transformed into regional statistics
-and high-quality figures.
+          This project demonstrates an end-to-end scientific data processing workflow.
+          Daily GeoTIFF products from the National Snow and Ice Data Center (NSIDC)
+          are automatically downloaded, analysed and transformed into regional statistics
+          and high-quality figures.
 
-</p>
+          </p>
 
-<p>
+          <p>
 
-The complete workflow is fully reproducible and designed for automated daily
-updates.
+          The complete workflow is fully reproducible and designed for automated daily
+          updates.
 
-</p>
+          </p>
 
-</section>
+        </section>
 
-<!-- ====================================================== -->
+        <!-- ====================================================== -->
 
-<section>
+        <section>
 
-<h2>Current Dataset</h2>
+        <h2>Current Dataset</h2>
 
-<div class="stats-grid">
+        <div class="stats-grid">
 
-<div class="stat-card">
-<h3>Dataset Date</h3>
-<p id="datasetDate">loading...</p>
-</div>
+          <div class="stat-card">
+            <h3>Dataset Date</h3>
+            <p id="datasetDate">loading...</p>
+          </div>
 
-<div class="stat-card">
-<h3>Hudson Bay sea ice coverage</h3>
-<p id="relativeCoverage">loading...</p>
-</div>
+          <div class="stat-card">
+            <h3>Hudson Bay sea ice coverage</h3>
+            <p id="relativeCoverage">loading...</p>
+          </div>
 
-<div class="stat-card">
-<h3>Ice-covered Area</h3>
-<p id="iceArea">loading...</p>
-</div>
+          <div class="stat-card">
+            <h3>Ice-covered Area</h3>
+            <p id="iceArea">loading...</p>
+          </div>
 
-<div class="stat-card">
-<h3>Dataset</h3>
-<p id="dataset">loading...</p>
-</div>
+          <div class="stat-card">
+            <h3>Dataset</h3>
+            <p id="dataset">loading...</p>
+          </div>
 
-<div class="stat-card">
-<h3>generated</h3>
-<p id="generated">loading...</p>
-</div>
+          <div class="stat-card">
+            <h3>generated</h3>
+            <p id="generated">loading...</p>
+          </div>
 
-<div class="stat-card">
-<h3>Current entries in dataset</h3>
-<p id="observations">loading...</p>
-</div>
+          <div class="stat-card">
+            <h3>Current entries in dataset</h3>
+            <p id="observations">loading...</p>
+          </div>
 
-<div class="stat-card">
-<h3>Pipeline</h3>
-<p style="color:green;">✔ Up to date</p>
-</div>
+          <div class="stat-card">
+            <h3>Pipeline</h3>
+            <p style="color:green;">✔ Up to date</p>
+          </div>
 
-</div>
+        </div>
 
-<p>
+        <p>
 
-These values are generated automatically during the daily processing pipeline
-and are read directly from the latest analysis results.
+        These values are generated automatically during the daily processing pipeline
+        and are read directly from the latest analysis results.
 
-</p>
+        </p>
 
-</section>
+        </section>
 
-<!-- ====================================================== -->
+        <!-- ====================================================== -->
 
-<section>
+        <section>
 
-<h2>Processing Pipeline</h2>
+          <h2>Processing Pipeline</h2>
 
-<ol>
+          <ol>
 
-<li>Automatic download of daily NSIDC GeoTIFF products</li>
+            <li>Automatic download of daily NSIDC GeoTIFF products</li>
 
-<li>GeoTIFF validation and preprocessing</li>
+            <li>GeoTIFF validation and preprocessing</li>
 
-<li>Geographic masking of predefined Hudson Bay regions</li>
+            <li>Geographic masking of predefined Hudson Bay regions</li>
 
-<li>Calculation of ice-covered area and relative ice coverage</li>
+            <li>Calculation of ice-covered area and relative ice coverage</li>
 
-<li>Generation of maps, time-series plots and polar visualisations</li>
+            <li>Generation of maps, time-series plots and polar visualisations</li>
 
-<li>Automatic export for GitHub Pages</li>
+            <li>Automatic export for GitHub Pages</li>
 
-</ol>
+          </ol>
 
-</section>
+        </section>
 
-<!-- ====================================================== -->
+        <!-- ====================================================== -->
 
-<section>
+        <section>
 
-<h2>Regional Overview</h2>
+        <h2>Regional Overview</h2>
 
-<figure class="plot">
+        <figure class="plot">
 
-<img
-src="https://raw.githubusercontent.com/Chris010980/hudson_bay_sea_ice_showcase/master/output/plots/sea_ice_geotiff_overview_hudson_bay.png"
-alt="Hudson Bay overview"
-class="plot-image">
+        <img
+        src="https://raw.githubusercontent.com/Chris010980/hudson_bay_sea_ice_showcase/master/output/plots/sea_ice_geotiff_overview_hudson_bay.png"
+        alt="Hudson Bay overview"
+        class="plot-image"/>
 
-<figcaption>
+        <figcaption>
 
-Daily sea ice concentration map together with the analysis region used for the
-statistical evaluation.
+        Daily sea ice concentration map together with the analysis region used for the
+        statistical evaluation.
 
-</figcaption>
+        </figcaption>
 
-</figure>
+        </figure>
 
-</section>
+        </section>
 
-<!-- ====================================================== -->
+        <!-- ====================================================== -->
 
-<section>
+        <section>
 
-<h2>Seasonal Evolution</h2>
+        <h2>Seasonal Evolution</h2>
 
-<figure class="plot">
+        <figure class="plot">
 
-<img
-src="https://raw.githubusercontent.com/Chris010980/hudson_bay_sea_ice_showcase/master/output/plots/timeseries/Hudson_Bay_relative.png"
-class="plot-image"
-alt="Hudson Bay Time Series">
+        <img
+        src="https://raw.githubusercontent.com/Chris010980/hudson_bay_sea_ice_showcase/master/output/plots/timeseries/Hudson_Bay_relative.png"
+        class="plot-image"
+        alt="Hudson Bay Time Series"/>
 
-<figcaption>
+        <figcaption>
 
-Relative sea ice coverage for all available years.
-Colours indicate observation year.
+        Relative sea ice coverage for all available years.
+        Colours indicate observation year.
 
-</figcaption>
+        </figcaption>
 
-</figure>
+        </figure>
 
-</section>
+        </section>
 
-<!-- ====================================================== -->
+        <!-- ====================================================== -->
 
-<section>
+        <section>
 
-<h2>Seasonal Cycle</h2>
+        <h2>Seasonal Cycle</h2>
 
-<figure class="plot">
+        <figure class="plot">
 
-<img
-src="https://raw.githubusercontent.com/Chris010980/hudson_bay_sea_ice_showcase/master/output/plots/timeseries/Hudson_Bay_polar_relative.png"
-class="plot-image"
-alt="Hudson Bay Polar Plot">
+        <img
+        src="https://raw.githubusercontent.com/Chris010980/hudson_bay_sea_ice_showcase/master/output/plots/timeseries/Hudson_Bay_polar_relative.png"
+        class="plot-image"
+        alt="Hudson Bay Polar Plot"/>
 
-<figcaption>
+        <figcaption>
 
-Polar representation of the annual freeze-up and melt cycle.
-Each curve represents one individual year.
+        Polar representation of the annual freeze-up and melt cycle.
+        Each curve represents one individual year.
 
-</figcaption>
+        </figcaption>
 
-</figure>
+        </figure>
 
-</section>
+        </section>
 
-<!-- ====================================================== -->
+        <!-- ====================================================== -->
 
-<section>
+        <section>
 
-<h2>Technical Highlights</h2>
+        <h2>Technical Highlights</h2>
 
-<ul>
+        <ul>
 
-<li>Automatic daily update pipeline</li>
+        <li>Automatic daily update pipeline</li>
 
-<li>Python-based geospatial processing</li>
+        <li>Python-based geospatial processing</li>
 
-<li>Rasterio & Cartopy for GIS visualisation</li>
+        <li>Rasterio & Cartopy for GIS visualisation</li>
 
-<li>Region masking using GeoJSON polygons</li>
+        <li>Region masking using GeoJSON polygons</li>
 
-<li>Publication-quality Matplotlib figures</li>
+        <li>Publication-quality Matplotlib figures</li>
 
-<li>Reproducible scientific workflow</li>
+        <li>Reproducible scientific workflow</li>
 
-<li>Continuous generation of analysis products</li>
+        <li>Continuous generation of analysis products</li>
 
-</ul>
+        </ul>
 
-</section>
+        </section>
 
-<!-- ====================================================== -->
+        <!-- ====================================================== -->
 
-<section>
+        <section>
 
-<h2>Repository</h2>
+        <h2>Repository</h2>
 
-<p>
+        <p>
 
-The complete processing pipeline including data download,
-analysis and visualisation is available on GitHub.
+        The complete processing pipeline including data download,
+        analysis and visualisation is available on GitHub.
 
-</p>
+        </p>
 
-<p>
+        <p>
 
-A dedicated project website containing the scientific background,
-methodology and future extensions is currently under development.
+        A dedicated project website containing the scientific background,
+        methodology and future extensions is currently under development.
 
-</p>
+        </p>
 
-</section>
+        </section>
 
-<section>
+        <section>
 
-<p>
+        <p>
 
-<a href="../index.html">
+        <a href="../index.html">
 
-← Back to portfolio
+        ← Back to portfolio
 
-</a>
+        </a>
 
-</p>
+        </p>
 
-</section>
+        </section>
 
-</main>
+      </main>
 
-<footer>
+      <footer>
 
-<p>
+        <p>
 
-© <span id="year"></span> Christian Lurz
+          © <span id="year"></span> Christian Lurz
 
-</p>
+        </p>
 
-</footer>
+      </footer>
 
-</div>
+    </div>
 
-<script>
+    <script>
 
-document.getElementById("year").textContent =
-new Date().getFullYear();
+    document.getElementById("year").textContent =
+    new Date().getFullYear();
 
-fetch(
-"https://raw.githubusercontent.com/Chris010980/hudson_bay_sea_ice_showcase/master/output/analysis/latest.json"
-)
+    fetch(
+    "https://raw.githubusercontent.com/Chris010980/hudson_bay_sea_ice_showcase/master/output/analysis/latest.json"
+    )
 
-.then(response => response.json())
+    .then(response => response.json())
 
-.then(data => {
+    .then(data => {
 
-    const hudsonBay = data.regions.find(
-        region => region.region === "Hudson Bay"
-    );
+        const hudsonBay = data.regions.find(
+            region => region.region === "Hudson Bay"
+        );
 
-    if (!hudsonBay) {
-        console.error("Hudson Bay not found.");
-        return;
-    }
+        if (!hudsonBay) {
+            console.error("Hudson Bay not found.");
+            return;
+        }
 
-    document.getElementById("datasetDate").textContent =
-        hudsonBay.date;
+        document.getElementById("datasetDate").textContent =
+            hudsonBay.date;
 
-    document.getElementById("relativeCoverage").textContent =
-        hudsonBay.relative_coverage_percent.toFixed(1) + " %";
+        document.getElementById("relativeCoverage").textContent =
+            hudsonBay.relative_coverage_percent.toFixed(1) + " %";
 
-    document.getElementById("iceArea").textContent =
-        Math.round(hudsonBay.relative_ice_area_km2).toLocaleString()
-        + " km²";
+        document.getElementById("iceArea").textContent =
+            Math.round(hudsonBay.relative_ice_area_km2).toLocaleString()
+            + " km²";
 
-    document.getElementById("dataset").textContent =
-        data.dataset;
+        document.getElementById("dataset").textContent =
+            data.dataset;
 
-    document.getElementById("generated").textContent =
-        new Date(data.generated).toLocaleString();
+        document.getElementById("generated").textContent =
+            new Date(data.generated).toLocaleString();
 
-    document.getElementById("observations").textContent =
-        data.observations.toLocaleString();
+        document.getElementById("observations").textContent =
+            data.observations.toLocaleString();
 
-})
+    })
 
-.catch(console.error);
+    .catch(console.error);
 
-</script>
+    </script>
 
-</body>
+    <div id="lightbox" class="lightbox" aria-hidden="true">
+      <img id="lightbox-img" alt="">
+    </div>
+
+    <script>
+
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+
+    document.querySelectorAll(".plot img").forEach(img => {
+
+        img.addEventListener("click", () => {
+
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+
+            lightbox.classList.add("active");
+
+        });
+
+    });
+
+    lightbox.addEventListener("click", () => {
+
+        lightbox.classList.remove("active");
+
+    });
+
+    document.addEventListener("keydown", event => {
+
+        if (event.key === "Escape") {
+
+            lightbox.classList.remove("active");
+
+        }
+
+    });
+
+    </script>
+
+  </body>
 
 </html>
