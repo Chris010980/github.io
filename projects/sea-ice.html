@@ -21,15 +21,15 @@
       <h1>Hudson Bay Sea Ice Monitoring</h1>
 
       <p>
-      An automated geospatial processing pipeline for analysing daily satellite-derived
-      sea ice concentration in the Hudson Bay region.
-      The project combines data acquisition, GIS processing,
-      time-series analysis and publication-quality visualisations.
+        Automated geospatial processing pipeline for daily Arctic sea ice observations.
+        The project demonstrates data acquisition, GIS processing,
+        quantitative analysis and automated publication workflows using Python.
       </p>
 
       <p>
         Source code:
-        <a href="https://github.com/Chris010980/hudson_bay_sea_ice_showcase" target="_blank">
+        <a href="https://github.com/Chris010980/hudson_bay_sea_ice_showcase"
+          target="_blank">
           github.com/Chris010980/hudson_bay_sea_ice_showcase
         </a>
       </p>
@@ -47,17 +47,16 @@
 
           <p>
 
-          This project demonstrates an end-to-end scientific data processing workflow.
-          Daily GeoTIFF products from the National Snow and Ice Data Center (NSIDC)
-          are automatically downloaded, analysed and transformed into regional statistics
-          and high-quality figures.
+          Scientific satellite products are automatically downloaded from NSIDC,
+          processed using Rasterio and GeoPandas,
+          analysed for several predefined Arctic regions,
+          and exported as publication-quality figures and machine-readable datasets.
 
           </p>
 
           <p>
 
-          The complete workflow is fully reproducible and designed for automated daily
-          updates.
+          The pipeline is fully reproducible and intended for unattended daily execution.
 
           </p>
 
@@ -71,47 +70,32 @@
 
         <div class="stats-grid">
 
-          <div class="stat-card">
-            <h3>Dataset Date</h3>
-            <p id="datasetDate">loading...</p>
-          </div>
+        <div class="stat-card">
+        <h3>Observation</h3>
+        <p id="datasetDate">loading...</p>
+        </div>
 
-          <div class="stat-card">
-            <h3>Hudson Bay sea ice coverage</h3>
-            <p id="relativeCoverage">loading...</p>
-          </div>
+        <div class="stat-card">
+        <h3>Dataset</h3>
+        <p id="dataset">loading...</p>
+        </div>
 
-          <div class="stat-card">
-            <h3>Ice-covered Area</h3>
-            <p id="iceArea">loading...</p>
-          </div>
+        <div class="stat-card">
+        <h3>Generated</h3>
+        <p id="generated">loading...</p>
+        </div>
 
-          <div class="stat-card">
-            <h3>Dataset</h3>
-            <p id="dataset">loading...</p>
-          </div>
-
-          <div class="stat-card">
-            <h3>generated</h3>
-            <p id="generated">loading...</p>
-          </div>
-
-          <div class="stat-card">
-            <h3>Current entries in dataset</h3>
-            <p id="observations">loading...</p>
-          </div>
-
-          <div class="stat-card">
-            <h3>Pipeline</h3>
-            <p style="color:green;">✔ Up to date</p>
-          </div>
+        <div class="stat-card">
+        <h3>Pipeline</h3>
+        <p style="color:green;">✔ Daily update successful</p>
+        </div>
 
         </div>
 
         <p>
 
-        These values are generated automatically during the daily processing pipeline
-        and are read directly from the latest analysis results.
+        The values below are automatically generated during the
+        daily processing pipeline.
 
         </p>
 
@@ -121,21 +105,57 @@
 
         <section>
 
+          <h2>Regional Summary</h2>
+
+          <table class="results-table">
+
+            <thead>
+
+              <tr>
+
+                <th>Region</th>
+
+                <th>Coverage</th>
+
+                <th>Ice Area</th>
+
+                <th>Ocean Area</th>
+
+              </tr>
+
+            </thead>
+
+            <tbody id="regionTableBody">
+
+            </tbody>
+
+          </table>
+
+        </section>
+
+        <!-- ====================================================== -->
+
+        <section class="container info-box">
+
           <h2>Processing Pipeline</h2>
 
           <ol>
 
             <li>Automatic download of daily NSIDC GeoTIFF products</li>
 
-            <li>GeoTIFF validation and preprocessing</li>
+            <li>GeoTIFF validation</li>
 
-            <li>Geographic masking of predefined Hudson Bay regions</li>
+            <li>Polar stereographic processing</li>
 
-            <li>Calculation of ice-covered area and relative ice coverage</li>
+            <li>Region masking using GeoJSON polygons</li>
 
-            <li>Generation of maps, time-series plots and polar visualisations</li>
+            <li>Ice coverage statistics</li>
 
-            <li>Automatic export for GitHub Pages</li>
+            <li>Automatic generation of figures</li>
+
+            <li>Export of CSV and latest.json</li>
+
+            <li>Deployment to GitHub Pages</li>
 
           </ol>
 
@@ -145,25 +165,43 @@
 
         <section>
 
-        <h2>Regional Overview</h2>
+          <h2>Regional Overview</h2>
 
-        <figure class="plot">
+          <figure class="plot">
 
-        <img
-        src="https://raw.githubusercontent.com/Chris010980/hudson_bay_sea_ice_showcase/master/output/plots/sea_ice_geotiff_overview_hudson_bay.png"
-        alt="Hudson Bay overview"
-        class="plot-image"/>
+            <img
+            src="https://raw.githubusercontent.com/Chris010980/hudson_bay_sea_ice_showcase/master/output/plots/sea_ice_geotiff_overview_hudson_bay.png"
+            alt="Hudson Bay overview"
+            class="plot-image"/>
 
-        <figcaption>
+            <figcaption>
 
-        Daily sea ice concentration map together with the analysis region used for the
-        statistical evaluation.
+            Daily sea ice concentration map together with the analysis region used for the
+            statistical evaluation.
 
-        </figcaption>
+            </figcaption>
 
-        </figure>
+          </figure>
 
         </section>
+
+        <details class="code-block">
+
+          <summary>Daily download pipeline</summary>
+
+          <pre><code class="language-python">
+
+          summary = downloader.sync(
+
+              start_date=start_date,
+
+              keep_existing=True,
+
+          )
+
+          </code></pre>
+
+        </details>
 
         <!-- ====================================================== -->
 
@@ -189,6 +227,30 @@
 
         </section>
 
+        <details class="code-block">
+
+        <summary>Region analysis</summary>
+
+        <pre><code class="language-python">
+
+        mask = filter_manager.get_mask(
+
+            "Hudson Bay",
+
+        )
+
+        coverage = analyzer.calculate(
+
+            raster,
+
+            mask,
+
+        )
+
+        </code></pre>
+
+        </details>
+
         <!-- ====================================================== -->
 
         <section>
@@ -213,6 +275,30 @@
 
         </section>
 
+        <details class="code-block">
+
+        <summary>Cartopy visualization</summary>
+
+        <pre><code class="language-python">
+
+        ax.pcolormesh(
+
+            lon,
+
+            lat,
+
+            concentration,
+
+            cmap=ice_cmap,
+
+            transform=ccrs.PlateCarree(),
+
+        )
+
+        </code></pre>
+
+        </details>
+
         <!-- ====================================================== -->
 
         <section>
@@ -221,19 +307,23 @@
 
         <ul>
 
-        <li>Automatic daily update pipeline</li>
+        <li>Automated daily data acquisition</li>
 
         <li>Python-based geospatial processing</li>
 
-        <li>Rasterio & Cartopy for GIS visualisation</li>
+        <li>Rasterio for GeoTIFF analysis</li>
 
-        <li>Region masking using GeoJSON polygons</li>
+        <li>Cartopy polar map projections</li>
+
+        <li>GeoJSON polygon masking</li>
+
+        <li>Pandas time-series aggregation</li>
+
+        <li>Automatic JSON export</li>
 
         <li>Publication-quality Matplotlib figures</li>
 
-        <li>Reproducible scientific workflow</li>
-
-        <li>Continuous generation of analysis products</li>
+        <li>Fully reproducible processing pipeline</li>
 
         </ul>
 
@@ -247,15 +337,18 @@
 
         <p>
 
-        The complete processing pipeline including data download,
-        analysis and visualisation is available on GitHub.
+        The repository contains the complete processing pipeline,
+        including automated downloads,
+        geospatial analysis,
+        time-series generation,
+        and publication-quality visualisations.
 
         </p>
 
         <p>
 
-        A dedicated project website containing the scientific background,
-        methodology and future extensions is currently under development.
+        All figures and statistics shown on this page are generated
+        automatically from the latest available NSIDC dataset.
 
         </p>
 
@@ -311,15 +404,37 @@
             return;
         }
 
+        const tbody =
+            document.getElementById("regionTableBody");
+
+        data.regions.forEach(region => {
+
+            tbody.insertAdjacentHTML(
+
+                "beforeend",
+
+                `
+
+        <tr>
+
+        <td>${region.region}</td>
+
+        <td>${region.relative_coverage_percent.toFixed(1)} %</td>
+
+        <td>${Math.round(region.relative_ice_area_km2).toLocaleString()} km²</td>
+
+        <td>${Math.round(region.water_area_km2).toLocaleString()} km²</td>
+
+        </tr>
+
+        `
+
+            );
+
+        });
+
         document.getElementById("datasetDate").textContent =
             hudsonBay.date;
-
-        document.getElementById("relativeCoverage").textContent =
-            hudsonBay.relative_coverage_percent.toFixed(1) + " %";
-
-        document.getElementById("iceArea").textContent =
-            Math.round(hudsonBay.relative_ice_area_km2).toLocaleString()
-            + " km²";
 
         document.getElementById("dataset").textContent =
             data.dataset;
