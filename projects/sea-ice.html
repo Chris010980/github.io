@@ -41,7 +41,7 @@
       <main>
 
         <!-- ====================================================== -->
-        <section class="container info-box">
+        <section class="info-container info-box">
 
           <h2>Project Overview</h2>
 
@@ -135,7 +135,7 @@
 
         <!-- ====================================================== -->
 
-        <section class="container info-box">
+        <section class="info-container info-box">
 
           <h2>Processing Pipeline</h2>
 
@@ -407,28 +407,38 @@
         const tbody =
             document.getElementById("regionTableBody");
 
-        data.regions.forEach(region => {
+        const regions = [...data.regions].sort((a, b) => {
+
+            if (a.region === "Hudson Bay Area") return 1;
+
+            if (b.region === "Hudson Bay Area") return -1;
+
+            return a.region.localeCompare(b.region);
+
+        });
+
+        regions.forEach(region => {
+
+            const classes = [];
+
+            if (region.region === "Hudson Bay") {
+                classes.push("highlight-row");
+            }
+
+            if (region.region === "Hudson Bay Area") {
+                classes.push("summary-row");
+            }
 
             tbody.insertAdjacentHTML(
-
                 "beforeend",
-
                 `
-
-        <tr>
-
-        <td>${region.region}</td>
-
-        <td>${region.relative_coverage_percent.toFixed(1)} %</td>
-
-        <td>${Math.round(region.relative_ice_area_km2).toLocaleString()} km²</td>
-
-        <td>${Math.round(region.water_area_km2).toLocaleString()} km²</td>
-
+        <tr class="${classes.join(" ")}">
+            <td>${region.region}</td>
+            <td>${region.relative_coverage_percent.toFixed(1)} %</td>
+            <td>${Math.round(region.relative_ice_area_km2).toLocaleString()} km²</td>
+            <td>${Math.round(region.water_area_km2).toLocaleString()} km²</td>
         </tr>
-
         `
-
             );
 
         });

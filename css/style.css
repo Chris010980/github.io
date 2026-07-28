@@ -50,9 +50,23 @@ a:hover {
   box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
 }
 
+.info-container {
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+}
+
+.info-container h2 {
+  margin-top: 0;
+}
+
 @media (max-width: 480px) {
   .container {
     padding: 10px;
+  }
+    .info-container {
+    padding: 5px;
   }
 }
 
@@ -631,4 +645,54 @@ figure {
 .github {
     background: #24292f;
     color: white;
+}
+
+/* =========================================================
+   Tables
+========================================================= */
+
+.results-table {
+    margin: 2.5rem auto;
+    border-collapse: collapse;
+    min-width: 700px;
+}
+
+.results-table caption {
+
+    margin-bottom: 1rem;
+
+}
+
+.results-table tbody tr:hover {
+
+    background: #f4f6f8;
+
+}
+
+.results-table th,
+.results-table td {
+    padding: 0.6rem 1rem;
+}
+
+.results-table th:first-child,
+.results-table td:first-child {
+    text-align: left;
+}
+
+.results-table th:not(:first-child),
+.results-table td:not(:first-child) {
+    text-align: right;
+}
+
+.highlight-row {
+    font-weight: 700;
+    background: #eef6ff;
+}
+
+.summary-row {
+
+    border-top: 2px solid #666;
+
+    font-weight: 700;
+
 }
